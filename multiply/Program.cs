@@ -18,7 +18,7 @@ namespace multiply
             // Validate Input
             IArgumentValidator _multiplierArgumentValidator;
             IMultiplier _multiplier;
-            IOutput _outputter;
+            IOutput _outputter = null;
             string[,] _multiplierGrid;
 
             try
@@ -36,8 +36,11 @@ namespace multiply
                     case Types.OutputType.csv:
                         break;
                     default:
+                        _outputter = new ConsoleOutputter(_multiplierGrid, _multiplierArgumentValidator.Rows, _multiplierArgumentValidator.Columns);
                         break;
                 }
+
+                _outputter.OutputGrid();
 
             }
             catch (ArgumentNullException ex)
