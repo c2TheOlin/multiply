@@ -49,17 +49,19 @@ namespace multiply.Model
             get { return _outputType; }
         }
 
+        // This needs improving
         private void ValidateArguments()
         {
             int validatedArg;
 
+            // Check for Arguments
             if (arguments == null || arguments.Length == 0)
             {
                 throw new ArgumentNullException("args", nullArgsException);
             }
             
+            // Validate the Mandatory Field
             bool isInt = int.TryParse(arguments[0], out validatedArg);
-
             if (!isInt)
             {
                 throw new InvalidCastException(invalidCastException.Replace("[value]", arguments[0]));
@@ -78,6 +80,7 @@ namespace multiply.Model
                 return;
             }
 
+            // Validate the optional fields
             isInt = int.TryParse(arguments[1], out validatedArg);
             bool isOutput = Enum.IsDefined(typeof(OutputType), arguments[1].ToLower());
 
@@ -109,6 +112,7 @@ namespace multiply.Model
                 throw new ArgumentException("Not a valid column value or output type");
             }
 
+            // Check for the last option if present
             if (arguments.Length <= 2)
             {
                 return;
@@ -127,11 +131,17 @@ namespace multiply.Model
             }
         }
 
+        // Check the input number falls within bounds
         private bool IsIntInRange(int inputtedValue)
         {
             return inputtedValue > 0 && inputtedValue <= 20;
         }
 
+        /// <summary>
+        /// Get the type of output
+        /// </summary>
+        /// <param name="inputtedValue"></param>
+        /// <returns></returns>
         private OutputType GetOutputType(string inputtedValue)
         {
             OutputType validatedArg;

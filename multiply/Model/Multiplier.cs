@@ -19,6 +19,7 @@ namespace multiply.Model
             {
                 throw new ArgumentException("Row value cannot be 0");
             }
+
             if(columns == 0)
             {
                 throw new ArgumentException("Column value cannot be 0");

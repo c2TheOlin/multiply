@@ -9,7 +9,6 @@ namespace multiply.test
     public class OutputterTests
     {
         private Outputter _outputter;
-        private TextWriter sw;
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]

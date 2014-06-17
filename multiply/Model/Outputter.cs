@@ -40,7 +40,7 @@ namespace multiply.Model
         public abstract void OutputGrid();
     }
 
-    public class HtmlOutputter : Outputter, IOutput
+    public class HtmlOutputter : Outputter
     {
         private string _filePath;
 
@@ -76,7 +76,7 @@ namespace multiply.Model
         }
     }
 
-    public class CvsOutputter : Outputter, IOutput
+    public class CvsOutputter : Outputter
     {
         private string _filePath;
 
@@ -105,7 +105,7 @@ namespace multiply.Model
         }
     }
 
-    public class ConsoleOutputter : Outputter, IOutput
+    public class ConsoleOutputter : Outputter
     {
         private int BufferSize = 5;
 
