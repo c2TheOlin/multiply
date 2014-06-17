@@ -50,12 +50,13 @@ namespace multiply.Model
 
         private void ValidateArguments()
         {
+            int validatedArg;
+
             if (arguments == null || arguments.Length == 0)
             {
                 throw new ArgumentNullException("args", nullArgsException);
             }
-
-            int validatedArg;
+            
             bool isInt = int.TryParse(arguments[0], out validatedArg);
 
             if (!isInt)
@@ -72,6 +73,7 @@ namespace multiply.Model
 
             if(arguments.Length <= 1)
             {
+                _column = _row;
                 return;
             }
 
