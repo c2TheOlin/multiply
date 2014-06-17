@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-  
+
 namespace multiply
 {
     public class Program
@@ -16,28 +16,55 @@ namespace multiply
         public static void Main(string[] args)
         {
             // Validate Input
-            Argument mulitpleArgumentValidator;
+            IArgumentValidator _multiplierArgumentValidator;
+            IMultiplier _multiplier;
+            IOutput _outputter;
+            string[,] _multiplierGrid;
+
             try
             {
-                mulitpleArgumentValidator = new MultiplierArgument(args);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ArgumentException || ex is ArgumentNullException 
-                    || ex is ArgumentOutOfRangeException || ex is ArgumentOutOfRangeException 
-                    || ex is InvalidCastException)
+                _multiplierArgumentValidator = new MultiplierArgumentValidtor(args);
+                 // Pass Values of column and/or row into a programme to produce the multiplication table.
+                _multiplier = new LoopMultiplier(_multiplierArgumentValidator.Rows, _multiplierArgumentValidator.Columns);
+                _multiplierGrid = _multiplier.GenerateMultiplicationGrid();
+
+                // Pass this into and output formatter.
+                switch(_multiplierArgumentValidator.OutputType)
                 {
-                    Console.WriteLine(ex.Message);
-                    return;
+                    case Types.OutputType.html:
+                        break;
+                    case Types.OutputType.csv:
+                        break;
+                    default:
+                        break;
                 }
 
-                throw;
             }
+            catch (ArgumentNullException ex)
+            {
+                OutputErrorMessage(ex);
+                return;
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                OutputErrorMessage(ex);
+                return;
+            }
+            catch (InvalidCastException ex)
+            {
+                OutputErrorMessage(ex);
+                return;
+            }
+            catch (ArgumentException ex)
+            {
+                OutputErrorMessage(ex);
+                return;
+            }
+        }
 
-            // Pass Values of column and/or row into a programme to produce the multiplication table.
-            // Produce standard output table.
-            // Pass this into and output formatter.
-
+        private static void OutputErrorMessage(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
         }
     }
 }

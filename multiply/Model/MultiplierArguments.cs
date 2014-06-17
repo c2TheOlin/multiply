@@ -3,15 +3,15 @@ using System;
 
 namespace multiply.Model
 {
-    public interface Argument
+    public interface IArgumentValidator
     {
         int Rows { get; }
         int Columns { get; }
         OutputType OutputType { get; }
     }
 
-    // Implementation of the Multiplier Argumentss
-    public class MultiplierArgument : Argument
+    // Implementation of the IMultiplier Argumentss
+    public class MultiplierArgumentValidtor : IArgumentValidator
     {
         private readonly string nullArgsException = "Null Arguments: A row value must be provided. " + System.Environment.NewLine +
                "You can provide the following when running the programme" + System.Environment.NewLine +
@@ -27,7 +27,7 @@ namespace multiply.Model
         private int _column;
         private OutputType _outputType = OutputType.console;
 
-        public MultiplierArgument(string[] args)
+        public MultiplierArgumentValidtor(string[] args)
         {
             arguments = args;
             ValidateArguments();

@@ -59,7 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Multiplier.cs" />
     <Compile Include="Model\MultiplierArguments.cs" />
+    <Compile Include="Model\Outputter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\OutputType.cs" />
