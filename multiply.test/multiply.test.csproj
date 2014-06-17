@@ -53,6 +53,7 @@
     <Compile Include="MultiplierTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MultiplierArgumentsValidationTests.cs" />
+    <Compile Include="OutputterTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\multiply\multiply.csproj">

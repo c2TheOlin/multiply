@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace multiply.Model
 {
@@ -12,7 +10,7 @@ namespace multiply.Model
         void OutputGrid();
     }
 
-    public abstract class Outputter
+    public abstract class Outputter : IOutput
     {
         protected string[,] _multiplierGrid;
         protected int _rows;
@@ -20,10 +18,26 @@ namespace multiply.Model
 
         public Outputter(string[,] multipierGrid, int rows, int columns)
         {
+            if(multipierGrid == null)
+            {
+                throw new ArgumentNullException("Grid cannot be empty");
+            }
+
+            if (rows == 0)
+            {
+                throw new ArgumentException("Rows value cannot be 0");
+            }
+            if (columns == 0)
+            {
+                throw new ArgumentException("Columns value cannot be 0");
+            }
+
             _multiplierGrid = multipierGrid;
             _rows = rows;
             _columns = columns;
         }
+
+        public abstract void OutputGrid();
     }
 
     public class HtmlOutputter : Outputter, IOutput
@@ -36,7 +50,7 @@ namespace multiply.Model
             this._filePath = filePath;
         }
 
-        public void OutputGrid()
+        public override void OutputGrid()
         {
             using (FileStream stream = new FileStream(_filePath, FileMode.Create))
             {
@@ -73,7 +87,7 @@ namespace multiply.Model
         }
 
 
-        public void OutputGrid()
+        public override void OutputGrid()
         {
             List<string> toWrite = new List<string>();
             for (int indexX = 0; indexX <= _rows; indexX++)
@@ -100,7 +114,7 @@ namespace multiply.Model
         {
         }
 
-        public void OutputGrid()
+        public override void OutputGrid()
         {
             for (int indexX = 0; indexX <= _rows; indexX++)
             {
