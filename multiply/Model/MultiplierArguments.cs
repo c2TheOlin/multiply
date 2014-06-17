@@ -10,7 +10,7 @@ namespace multiply.Model
         OutputType OutputType { get; }
     }
 
-    // Implementation of the IMultiplier Argumentss
+    // Implementation of the IMultiplier Arguments
     public class MultiplierArgumentValidtor : IArgumentValidator
     {
         private readonly string nullArgsException = "Null Arguments: A row value must be provided. " + System.Environment.NewLine +
@@ -21,6 +21,7 @@ namespace multiply.Model
 
         private readonly string invalidCastException = "[value] is not a valid numeric number. Please enter a value from 1 - 20";
         private readonly string outofRangeException = "[value] is not a valid entry. Values must be between 1 - 20";
+        private readonly string outputTypeError = "Not a valid output type - please choose from csv, html or console";
 
         private string[] arguments;
         private int _row;
@@ -100,7 +101,12 @@ namespace multiply.Model
 
             if(!isInt && !isOutput)
             {
-                throw new ArgumentException("someerror");
+                if (arguments.Length > 2)
+                {
+                    throw new ArgumentException("Not a valid column value use a number between 1-20");
+                }
+               
+                throw new ArgumentException("Not a valid column value or output type");
             }
 
             if (arguments.Length <= 2)
@@ -117,7 +123,7 @@ namespace multiply.Model
             }
             else
             {
-                throw new ArgumentException("Not a valid output");
+                throw new ArgumentException(outputTypeError);
             }
         }
 
@@ -132,7 +138,7 @@ namespace multiply.Model
 
             if(string.IsNullOrWhiteSpace(inputtedValue))
             {
-               throw new ArgumentNullException("Some Error");
+               throw new ArgumentNullException("Cannot have a blank output type - please choose from csv, html or console");
             }
 
             try
@@ -141,7 +147,7 @@ namespace multiply.Model
             }
             catch(InvalidCastException ex)
             {
-                throw new InvalidCastException("Some message", ex);
+                throw new InvalidCastException(outputTypeError, ex);
             }
 
             return validatedArg;
